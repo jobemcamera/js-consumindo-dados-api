@@ -1,8 +1,8 @@
-@import url("header.css");
-@import url("banner.css");
-@import url("formulario.css");
-@import url("rodape.css");
-@import url("cadastro.css");
+@import url("./header.css");
+@import url("./banner.css");
+@import url("./formulario.css");
+@import url("./rodape.css");
+@import url("./cadastro.css");
 
 :root {
     --cor-de-fundo: #EBECEE;
