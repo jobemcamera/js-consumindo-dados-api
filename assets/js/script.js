@@ -6,17 +6,23 @@
 // 000000000000000000000que a de um objeto JS.
 // try / catch para tratar o erro da promise
 
-async function buscaEndereco() {
+async function buscaEndereco(cep) {
     try {
-        var consultaCEP = await fetch('http://viacep.com.br/ws/01001000/json/')
+        var consultaCEP = await fetch(`http://viacep.com.br/ws/${cep}/json/`)
         var consultaCEPConvertida = await consultaCEP.json()
         if (consultaCEPConvertida.erro) { //retorna TRUE se houver erro
             throw Error('CEP não existente!')
         }
         console.log(consultaCEPConvertida)
+        return consultaCEPConvertida
     } catch (erro) {
         console.log(erro)
     }
 }
 
-buscaEndereco()
+// array com vários CEP's
+let ceps = ['01001000', '01001001']
+// array com as repostas de cada CEP procurado pela funcao buscaEndereco
+let conjuntoCeps = ceps.map(valores => buscaEndereco(valores))
+// Promise.all faz várias requisições ao mesmo tempo
+Promise.all(conjuntoCeps).then(respostas => console.log(respostas))
