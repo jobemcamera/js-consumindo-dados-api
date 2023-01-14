@@ -7,8 +7,13 @@
 // try / catch para tratar o erro da promise
 
 async function buscaEndereco(cep) {
+    var mensagemErro = document.getElementById('erro')
+    mensagemErro.innerHTML = ""
+
+    var cepTratado = cep.replace('-', '')
+
     try {
-        var consultaCEP = await fetch(`http://viacep.com.br/ws/${cep}/json/`)
+        var consultaCEP = await fetch(`http://viacep.com.br/ws/${cepTratado}/json/`)
         var consultaCEPConvertida = await consultaCEP.json()
         if (consultaCEPConvertida.erro) { //retorna TRUE se houver erro
             throw Error('CEP não existente!')
@@ -26,9 +31,17 @@ async function buscaEndereco(cep) {
 
         return consultaCEPConvertida
     } catch (erro) {
+        mensagemErro.innerHTML = `<p>CEP inválido. Tente novamente!</p>`
         console.log(erro)
     }
 }
 
 var cep = document.getElementById('cep')
 cep.addEventListener('focusout', () => buscaEndereco(cep.value))
+
+// 01001-001
+function cepMascara(cep) {
+    if (cep.value.length == 5) {
+        cep.value = cep.value + '-' 
+    }
+}

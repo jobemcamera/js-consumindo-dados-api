@@ -100,7 +100,8 @@
 
             <div class="formulario__campo">
                 <label class="campo__etiqueta" for="cep">CEP</label>
-                <input name="cep" id="cep" class="campo__escrita" required />
+                <input name="cep" id="cep" class="campo__escrita" maxlength="9" onkeypress="cepMascara(this)" required />
+                <div id="erro"></div>
             </div>
 
             <div class="formulario__campo">

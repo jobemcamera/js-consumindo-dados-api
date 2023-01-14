@@ -39,6 +39,13 @@
 
 }
 
+#erro {
+    color: red;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 5px 0 0 15px;
+}
+
 .formulario__dupla {
     display: flex;
 }
