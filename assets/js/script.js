@@ -13,16 +13,22 @@ async function buscaEndereco(cep) {
         if (consultaCEPConvertida.erro) { //retorna TRUE se houver erro
             throw Error('CEP não existente!')
         }
+
+        var cidade = document.getElementById('cidade')
+        var logradouro = document.getElementById('endereco')
+        var estado = document.getElementById('estado')
+        
+        cidade.value = consultaCEPConvertida.localidade
+        logradouro.value = consultaCEPConvertida.logradouro
+        estado.value = consultaCEPConvertida.uf
+
         console.log(consultaCEPConvertida)
+
         return consultaCEPConvertida
     } catch (erro) {
         console.log(erro)
     }
 }
 
-// array com vários CEP's
-let ceps = ['01001000', '01001001']
-// array com as repostas de cada CEP procurado pela funcao buscaEndereco
-let conjuntoCeps = ceps.map(valores => buscaEndereco(valores))
-// Promise.all faz várias requisições ao mesmo tempo
-Promise.all(conjuntoCeps).then(respostas => console.log(respostas))
+var cep = document.getElementById('cep')
+cep.addEventListener('focusout', () => buscaEndereco(cep.value))
